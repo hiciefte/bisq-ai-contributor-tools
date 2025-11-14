@@ -1,0 +1,49 @@
+{
+  "name": "bisq-marketplace",
+  "owner": {
+    "name": "Bisq Community",
+    "email": "dev@bisq.network"
+  },
+  "metadata": {
+    "description": "Official Bisq development tools marketplace for Claude Code",
+    "version": "1.0.0",
+    "pluginRoot": "."
+  },
+  "plugins": [
+    {
+      "name": "bisq-dev-tools",
+      "source": ".",
+      "description": "Comprehensive development tools and configurations for Bisq contributors including custom commands, agents, skills, and integrations for P2P networking, Bitcoin transactions, DAO governance, and JavaFX development",
+      "version": "1.0.0",
+      "author": {
+        "name": "Bisq Community",
+        "email": "dev@bisq.network"
+      },
+      "homepage": "https://github.com/bisq-network/bisq",
+      "repository": "https://github.com/hiciefte/bisq-claude-plugin",
+      "license": "AGPL-3.0",
+      "keywords": [
+        "bisq",
+        "bitcoin",
+        "p2p",
+        "decentralized",
+        "development",
+        "java",
+        "javafx",
+        "gradle",
+        "dao",
+        "trading"
+      ],
+      "category": "development",
+      "tags": [
+        "bitcoin",
+        "p2p-networking",
+        "java",
+        "gradle",
+        "financial-software",
+        "security"
+      ],
+      "strict": true
+    }
+  ]
+}

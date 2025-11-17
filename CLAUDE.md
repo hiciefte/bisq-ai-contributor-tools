@@ -28,6 +28,7 @@ bisq-claude-plugin/
 │   └── marketplace.json     # Marketplace catalog definition
 ├── skills/                   # Skill definitions following 2025 spec
 │   ├── git-commit-writer/   # ✅ ACTIVE: Git commit standards
+│   ├── bisq-pr-reviewer/    # ✅ ACTIVE: PR review with Bisq domain expertise
 │   └── [future-skills]/     # Planned: Bisq architecture, security
 ├── commands/                 # Slash command definitions
 ├── agents/                   # Specialized AI agent definitions
@@ -101,6 +102,7 @@ When adding new components, follow these guidelines:
 - **Content**: Activation triggers, workflow steps, code examples
 - **Examples**:
   - `git-commit-writer` - Git commit standards ✅ IMPLEMENTED
+  - `bisq-pr-reviewer` - PR review with CodeRabbitAI + Bisq expertise ✅ IMPLEMENTED
   - `bisq-architecture` - Bisq system architecture patterns (planned)
   - `p2p-networking` - P2P protocol best practices (planned)
   - `bitcoin-security` - Bitcoin integration security (planned)
@@ -110,10 +112,10 @@ When adding new components, follow these guidelines:
 - **Naming**: Use descriptive hyphen-case names
 - **Focus**: Common Bisq development tasks
 - **Examples**:
-  - `bisq-build-module` - Build specific Bisq modules
-  - `bisq-run-tests` - Execute integration tests
-  - `bisq-analyze-protocol` - Analyze trade protocol states
-  - `bisq-security-review` - Security-focused code review
+  - `review-pr` - Comprehensive CodeRabbitAI PR review extraction ✅ IMPLEMENTED
+  - `bisq-build-module` - Build specific Bisq modules (planned)
+  - `bisq-run-tests` - Execute integration tests (planned)
+  - `bisq-analyze-protocol` - Analyze trade protocol states (planned)
 
 ### 3. Agents
 - **Location**: `agents/{agent-name}.md`

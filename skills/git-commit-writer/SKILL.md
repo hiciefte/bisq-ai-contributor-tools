@@ -1,13 +1,13 @@
 ---
 name: git-commit-writer
-description: Guide Claude to write professional, informative Git commit messages following industry best practices. Use this skill when writing commit messages, reviewing proposed commits, or helping users improve their commit message quality. Triggers include tasks involving git commits, version control documentation, or questions about commit message standards.
+description: Guide Codex or Claude Code to write professional, informative Git commit messages following industry best practices. Use this skill when writing commit messages, reviewing proposed commits, helping users improve commit message quality, or handling git, version control, or contribution documentation tasks.
 ---
 
 # Git Commit Writer
 
 ## Overview
 
-This skill enables writing professional Git commit messages that follow industry best practices based on Chris Beams' widely-adopted guidelines. Well-crafted commit messages preserve institutional knowledge, improve code maintainability, and make collaboration more effective.
+This skill enables writing professional Git commit messages that follow industry best practices based on Chris Beams' widely-adopted guidelines. Well-crafted commit messages preserve institutional knowledge, improve code maintainability, and make collaboration more effective in either Codex or Claude Code.
 
 ## When to Use This Skill
 

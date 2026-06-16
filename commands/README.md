@@ -1,20 +1,32 @@
 # Bisq Commands
 
-This directory contains custom slash commands for common Bisq development workflows.
+This directory contains Claude Code slash-command workflows and reusable command playbooks for Bisq development.
 
-## Coming Soon
+## Available Commands
 
-Commands will be added for:
-- Building specific Bisq modules
-- Running integration tests
-- Analyzing trade protocols
-- Reviewing security-sensitive code
-- Gradle task shortcuts
-- DAO governance operations
+### review-pr
+
+`commands/review-pr.md` defines a comprehensive pull request review workflow. It checks CI status, extracts review comments from GitHub and CodeRabbitAI, filters new feedback, verifies comments against current code, and produces an action checklist.
+
+Use in Claude Code:
+
+```text
+/review-pr owner/repo#123
+```
+
+Use in Codex by opening `commands/review-pr.md` and following the same phases with `gh`, repository inspection, and local verification.
+
+## Planned Commands
+
+- Build specific Bisq modules
+- Run focused integration tests
+- Analyze trade protocol state transitions
+- Review security-sensitive Bitcoin/P2P changes
+- Inspect DAO governance impacts
 
 ## Command Structure
 
-Each command is defined in a markdown file with the following structure:
+Each command is a Markdown file with YAML frontmatter:
 
 ```markdown
 ---
@@ -24,17 +36,7 @@ description: Brief description of what the command does
 
 # Command Implementation
 
-[Command prompt/instructions for Claude Code]
+[Detailed instructions for the agent]
 ```
 
-## Examples
-
-Future commands might include:
-- `/bisq-build [module]` - Build specific Bisq module
-- `/bisq-test [test-class]` - Run integration tests
-- `/bisq-analyze-protocol` - Analyze trade protocol state machines
-- `/bisq-security-review` - Security-focused code review
-
-## Contributing
-
-See [CLAUDE.md](../CLAUDE.md) for guidance on creating Bisq-specific commands.
+Use hyphen-case names and include examples, expected outputs, and failure handling.

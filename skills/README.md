@@ -1,42 +1,45 @@
-# Bisq Claude Code Skills
+# Bisq AI Skills
 
-This directory contains skills for Claude Code to enhance its capabilities when working with Bisq development.
+Skills in this directory are shared by Codex and Claude Code. Each skill must be self-contained, use hyphen-case, and define `SKILL.md` with YAML frontmatter containing `name` and `description`.
 
 ## Available Skills
 
+### bisq-contributor-workflow
+
+Guides day-to-day Bisq implementation work: issue analysis, narrow changes, Java/JavaFX conventions, Gradle verification, P2P safety, wallet and transaction checks, DAO impact, and documentation updates.
+
+### bisq2-javafx-ui
+
+Guides production-ready Bisq2 JavaFX UI work with strict MVC structure, lifecycle cleanup, design system conventions, navigation wiring, automation selectors, desktop harness verification, and review checklists.
+
+### bisq-pr-reviewer
+
+Performs comprehensive Bisq pull request review by combining review-comment extraction with contribution standards, architecture review, and Bitcoin/P2P security validation.
+
 ### git-commit-writer
 
-Guides Claude to write professional, informative Git commit messages following industry best practices based on Chris Beams' widely-adopted guidelines.
+Drafts and reviews professional commit messages with imperative subjects, concise summaries, and body text focused on what changed and why.
 
-**When to use:**
-- Writing commit messages for Bisq code changes
-- Reviewing proposed commits before they're pushed
-- Improving commit message quality
-- Questions about commit message standards
+### ui-design-principles
 
-**Key features:**
-- Follows the seven core rules of great commit messages
-- Subject line limited to 50 characters
-- Uses imperative mood ("Fix bug" not "Fixed bug")
-- Body wrapped at 72 characters
-- Explains what and why, not how
+Applies pragmatic UI quality checks for JavaFX, web, desktop, mobile, and CLI interfaces.
 
-**Reference:** See `git-commit-writer/references/detailed-guide.md` for comprehensive examples and patterns.
+## Required Structure
 
-## Using Skills
+```text
+skills/{skill-name}/
+├── SKILL.md
+├── agents/openai.yaml
+└── references/          # Optional, for detailed material loaded as needed
+```
 
-Claude Code automatically activates skills when appropriate context is detected. Skills can also be manually invoked using the Skill tool.
+Use `references/` for long checklists or examples. Keep the main `SKILL.md` focused on workflow and routing.
 
-## Adding New Skills
+## Validation
 
-When adding skills for Bisq development, consider:
+Run from the repository root:
 
-1. **Bisq-Specific Knowledge**: Domain expertise about P2P networking, Bitcoin integration, DAO governance
-2. **Development Workflows**: Common patterns and practices in Bisq development
-3. **Security Awareness**: Financial software security best practices
-4. **Architecture Patterns**: Multi-module Gradle project patterns, JavaFX UI patterns
-
-Skills should include:
-- `SKILL.md` with clear activation triggers and usage patterns
-- `references/` directory with detailed guides and examples
-- Frontmatter with name and description for Claude Code integration
+```bash
+python3 scripts/validate-repo.py
+git diff --check
+```

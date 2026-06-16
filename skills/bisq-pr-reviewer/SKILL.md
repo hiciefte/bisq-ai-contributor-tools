@@ -1,7 +1,6 @@
 ---
 name: bisq-pr-reviewer
-description: Provides comprehensive Bisq PR review by integrating CodeRabbitAI feedback extraction with Bisq-specific security validation, contribution standards verification, and domain expertise for Bitcoin/P2P code. This skill should be used when reviewing Bisq pull requests, validating contribution standards, or performing security reviews of Bitcoin/cryptocurrency code changes.
-allowed-tools: [Read, Bash, Grep, Glob, SlashCommand]
+description: Provide comprehensive Bisq PR review in Codex or Claude Code by integrating CodeRabbitAI feedback extraction with Bisq-specific security validation, contribution standards verification, and domain expertise for Bitcoin, P2P, trade protocol, DAO, Java, and JavaFX changes. Use when reviewing Bisq pull requests, validating contribution standards, extracting unresolved review comments, or performing security reviews of cryptocurrency code changes.
 ---
 
 # Bisq PR Reviewer
@@ -9,6 +8,10 @@ allowed-tools: [Read, Bash, Grep, Glob, SlashCommand]
 ## Purpose
 
 Deliver comprehensive pull request review for Bisq repositories through a two-phase process: systematic CodeRabbitAI comment extraction followed by Bisq domain expertise analysis covering security validation, contribution standards compliance, and architecture patterns.
+
+## Tooling
+
+Use the host environment's normal file, shell, and GitHub tools. In Claude Code, the bundled `/review-pr` command can run the extraction workflow directly. In Codex, read `commands/review-pr.md` from this plugin and execute the same steps with `gh`, local file reads, and repository inspection.
 
 ## When to Use
 
@@ -30,13 +33,13 @@ Trigger this skill for:
 
 ### Phase 1: CodeRabbitAI Comment Extraction
 
-Execute the `/review-pr` command to systematically extract and organize all review feedback:
+Systematically extract and organize all review feedback. In Claude Code, execute the bundled `/review-pr` command:
 
 ```bash
 SlashCommand: "/review-pr {pr_number or owner/repo#pr}"
 ```
 
-**Note**: The `/review-pr` command is bundled in `commands/review-pr.md` within this plugin, providing Bisq team members with proven comment extraction workflow.
+In Codex, open `commands/review-pr.md` within this plugin and follow that command's phases manually.
 
 **Phase 1 delivers**:
 1. CI/CD status verification

@@ -4,8 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Purpose
 
-This repository contains a **Claude Code Plugin Marketplace** for Bisq developers and contributors. It provides:
-- **Skills**: Domain knowledge for Git commits, Bisq architecture, security practices
+This repository contains a **dual Codex and Claude Code plugin source** for Bisq developers and contributors. It provides:
+- **Skills**: Domain knowledge for Bisq contribution workflows, PR review, commits, UI quality, architecture, and security practices
 - **Commands**: Slash commands for common Bisq development workflows (planned)
 - **Agents**: Specialized AI assistants for Bisq-specific tasks (planned)
 - **Hooks**: Event handlers for Bisq development automation (planned)
@@ -13,7 +13,7 @@ This repository contains a **Claude Code Plugin Marketplace** for Bisq developer
 
 ## Tech Stack & Versions
 
-- **Plugin System**: Claude Code Plugin System (2025 Spec)
+- **Plugin Systems**: Codex plugin manifest plus Claude Code plugin marketplace metadata
 - **License**: GNU AGPL-3.0 (matching Bisq 2 project)
 - **Documentation Format**: Markdown with YAML frontmatter
 - **Naming Convention**: hyphen-case for all identifiers
@@ -23,13 +23,17 @@ This repository contains a **Claude Code Plugin Marketplace** for Bisq developer
 
 ```
 bisq-claude-plugin/
-├── .claude-plugin/           # Plugin configuration (DO NOT MODIFY manually)
+├── .claude-plugin/           # Claude Code plugin and marketplace metadata
 │   ├── plugin.json          # Plugin manifest with metadata
 │   └── marketplace.json     # Marketplace catalog definition
+├── .codex-plugin/
+│   └── plugin.json          # Codex plugin manifest
 ├── skills/                   # Skill definitions following 2025 spec
+│   ├── bisq-contributor-workflow/ # ✅ ACTIVE: Bisq implementation workflow
+│   ├── bisq2-javafx-ui/    # ✅ ACTIVE: Bisq2 JavaFX UI implementation
 │   ├── git-commit-writer/   # ✅ ACTIVE: Git commit standards
 │   ├── bisq-pr-reviewer/    # ✅ ACTIVE: PR review with Bisq domain expertise
-│   └── [future-skills]/     # Planned: Bisq architecture, security
+│   └── ui-design-principles/# ✅ ACTIVE: UI quality guidance
 ├── commands/                 # Slash command definitions
 ├── agents/                   # Specialized AI agent definitions
 ├── hooks/                    # Event-driven automation hooks
@@ -38,14 +42,20 @@ bisq-claude-plugin/
 ├── CLAUDE.md                # THIS FILE: Project guidance for Claude
 ├── README.md                # User-facing project documentation
 ├── INSTALLATION.md          # Installation and setup guide
+├── AGENTS.md                # Contributor guide for coding agents
+├── scripts/                 # Local validation helpers
 └── LICENSE                  # AGPL-3.0 license text
 ```
 
-**Standard Commands:**
+**Claude Code commands:**
 - `/plugin marketplace add takahiro/bisq-claude-plugin` - Add marketplace
 - `/plugin install bisq-dev-tools@bisq-marketplace` - Install plugin
 - `/plugin list` - View installed plugins
 - `/plugin update bisq-dev-tools` - Update plugin to latest version
+
+**Repository validation:**
+- `python3 scripts/validate-repo.py` - Validate manifests and skill structure
+- `git diff --check` - Catch whitespace issues before commit
 
 ## Bisq Development Context
 
@@ -77,7 +87,6 @@ Key aspects of Bisq development that configurations should address:
 ---
 name: skill-name
 description: Brief description (one sentence)
-allowed-tools: [Read, Write, Bash]  # Explicit tool permissions
 ---
 
 # Skill Name
@@ -85,10 +94,12 @@ allowed-tools: [Read, Write, Bash]  # Explicit tool permissions
 [Comprehensive documentation with trigger phrases, workflows, examples]
 ```
 
+Keep skill frontmatter to `name` and `description` for Codex compatibility. Put Claude-specific tool or slash-command guidance in the Markdown body.
+
 ### Documentation Standards
 - **YAML frontmatter**: Required for all skills
 - **Trigger phrases**: Explicit activation keywords
-- **File size**: Comprehensive (>3000 bytes recommended)
+- **Scope**: Keep `SKILL.md` focused; move detailed checklists into `references/`
 - **Examples**: Include code examples and error handling
 - **Version tracking**: Semantic versioning (1.0.0)
 
@@ -98,12 +109,16 @@ When adding new components, follow these guidelines:
 
 ### 1. Skills
 - **Location**: `skills/{skill-name}/SKILL.md`
-- **Required**: YAML frontmatter with `name`, `description`, `allowed-tools`
+- **Required**: YAML frontmatter with `name`, `description`
+- **Recommended**: `skills/{skill-name}/agents/openai.yaml` for Codex UI metadata
 - **Content**: Activation triggers, workflow steps, code examples
 - **Examples**:
+  - `bisq-contributor-workflow` - Implementation workflow and verification ✅ IMPLEMENTED
+  - `bisq2-javafx-ui` - Bisq2 JavaFX MVC, design system, and harness workflow ✅ IMPLEMENTED
   - `git-commit-writer` - Git commit standards ✅ IMPLEMENTED
   - `bisq-pr-reviewer` - PR review with CodeRabbitAI + Bisq expertise ✅ IMPLEMENTED
-  - `bisq-architecture` - Bisq system architecture patterns (planned)
+  - `ui-design-principles` - UI quality and JavaFX guidance ✅ IMPLEMENTED
+  - `bisq-architecture` - Deep architecture patterns (planned)
   - `p2p-networking` - P2P protocol best practices (planned)
   - `bitcoin-security` - Bitcoin integration security (planned)
 
@@ -138,8 +153,9 @@ When adding new components, follow these guidelines:
 ## Security & Compliance
 
 ### Critical Security Zones ("DO NOT TOUCH")
-- `.claude-plugin/plugin.json` - Auto-managed, manual edits break marketplace
-- `.claude-plugin/marketplace.json` - Modify only during releases
+- `.claude-plugin/plugin.json` - Keep valid for Claude Code plugin ingestion
+- `.claude-plugin/marketplace.json` - Modify only when marketplace metadata changes
+- `.codex-plugin/plugin.json` - Keep valid for Codex plugin ingestion
 - `LICENSE` - AGPL-3.0, must not be changed without legal review
 
 ### Security Best Practices
@@ -160,11 +176,10 @@ All plugin configurations must respect:
 
 ### Before Creating Pull Requests
 - [ ] All skill files include YAML frontmatter with required fields
+- [ ] Each skill includes `agents/openai.yaml`
 - [ ] Skill names use hyphen-case format
-- [ ] Documentation exceeds 3000 bytes (comprehensive)
 - [ ] Trigger phrases are explicit and clear
 - [ ] Code examples are tested and functional
-- [ ] Tool permissions declared in `allowed-tools`
 - [ ] Version numbers follow semantic versioning
 
 ### CI/CD Integration (Future)

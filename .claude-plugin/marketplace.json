@@ -5,7 +5,7 @@
     "email": "dev@bisq.network"
   },
   "metadata": {
-    "description": "Official Bisq development tools marketplace for Claude Code",
+    "description": "Bisq development tools marketplace for Claude Code and Codex-compatible skill sources",
     "version": "1.0.0",
     "pluginRoot": "."
   },
@@ -13,7 +13,7 @@
     {
       "name": "bisq-dev-tools",
       "source": ".",
-      "description": "Comprehensive development tools and configurations for Bisq contributors including custom commands, agents, skills, and integrations for P2P networking, Bitcoin transactions, DAO governance, and JavaFX development",
+      "description": "AI contributor workflows, skills, commands, and review guidance for Bisq contributors working on P2P networking, Bitcoin transactions, DAO governance, and JavaFX development",
       "version": "1.0.0",
       "author": {
         "name": "Bisq Community",

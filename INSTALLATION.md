@@ -1,165 +1,68 @@
 # Installation Guide
 
-This guide walks you through installing the Bisq Claude Code Plugin marketplace and its tools.
+This guide covers using `bisq-dev-tools` with Claude Code or Codex.
 
 ## Prerequisites
 
-- [Claude Code](https://claude.ai/code) installed and configured
-- Git (for remote installation method)
-- Access to a terminal/command line
+- Git
+- Claude Code and/or Codex
+- A terminal
 
-## Installation Methods
+## Claude Code Installation
 
-### Method 1: GitHub Installation (Recommended for Users)
+For the published marketplace:
 
-Once this repository is published to GitHub:
-
-1. **Add the Bisq marketplace:**
-   ```
-   /plugin marketplace add hiciefte/bisq-claude-plugin
-   ```
-
-2. **Install the Bisq development tools:**
-   ```
-   /plugin install bisq-dev-tools@bisq-marketplace
-   ```
-
-3. **Verify installation:**
-   ```
-   /plugin list
-   ```
-
-   You should see `bisq-dev-tools` in the list of installed plugins.
-
-### Method 2: Local Installation (For Development/Testing)
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/hiciefte/bisq-claude-plugin.git
-   cd bisq-claude-plugin
-   ```
-
-2. **Add the local marketplace to Claude Code:**
-
-   In Claude Code, run:
-   ```
-   /plugin marketplace add /full/path/to/bisq-claude-plugin
-   ```
-
-   Replace `/full/path/to/bisq-claude-plugin` with the actual path where you cloned the repository.
-
-3. **Install the plugin:**
-   ```
-   /plugin install bisq-dev-tools@bisq-marketplace
-   ```
-
-4. **Verify installation:**
-   ```
-   /plugin list
-   ```
-
-### Method 3: Git URL Installation
-
-If you have access to the repository via HTTPS or SSH:
-
-1. **Add marketplace via Git URL:**
-   ```
-   /plugin marketplace add https://github.com/hiciefte/bisq-claude-plugin.git
-   ```
-
-2. **Install the plugin:**
-   ```
-   /plugin install bisq-dev-tools@bisq-marketplace
-   ```
-
-## Managing the Plugin
-
-### View Available Marketplaces
-```
-/plugin marketplace list
+```text
+/plugin marketplace add hiciefte/bisq-claude-plugin
+/plugin install bisq-dev-tools@bisq-marketplace
+/plugin list
 ```
 
-### Enable/Disable the Plugin
+For local development:
 
-Temporarily disable without uninstalling:
-```
-/plugin disable bisq-dev-tools
-```
-
-Re-enable:
-```
-/plugin enable bisq-dev-tools
+```text
+/plugin marketplace add /full/path/to/bisq-claude-plugin
+/plugin install bisq-dev-tools@bisq-marketplace
+/plugin list
 ```
 
-### Update the Plugin
+After editing skills or commands, reinstall locally:
 
-To get the latest version:
-```
-/plugin update bisq-dev-tools
-```
-
-### Uninstall the Plugin
-
-```
+```text
 /plugin uninstall bisq-dev-tools
+/plugin install bisq-dev-tools@bisq-marketplace
 ```
 
-### Remove the Marketplace
+## Codex Installation
 
-```
-/plugin marketplace remove bisq-marketplace
-```
+The repository includes `.codex-plugin/plugin.json` and shared skills under `skills/`. Add or reinstall this plugin through your configured Codex plugin marketplace/source, then start a new thread so Codex reloads skill metadata.
 
-## Verifying Installation
+Before installing or submitting changes, validate the repo:
 
-After installation, you should have access to:
-
-### Skills
-- **git-commit-writer**: Professional Git commit message guidance
-
-Try asking Claude Code:
-```
-How should I write this commit message for my authentication refactoring?
+```bash
+python3 scripts/validate-repo.py
+git diff --check
 ```
 
-### Commands (Coming Soon)
-Custom Bisq development commands will be available via slash commands like `/bisq-build`
+## Verifying Skills
 
-### Agents (Coming Soon)
-Specialized Bisq domain experts will be available for specific development tasks
+Try prompts that should trigger each skill:
+
+```text
+Use bisq-contributor-workflow to implement this Bisq issue safely.
+Use bisq2-javafx-ui to implement this Bisq2 JavaFX screen.
+Use bisq-pr-reviewer to review bisq-network/bisq2#123.
+Use git-commit-writer to draft a commit message for my staged changes.
+Use ui-design-principles to review this JavaFX layout.
+```
 
 ## Troubleshooting
 
-### Plugin Not Found
-- Verify the marketplace was added correctly: `/plugin marketplace list`
-- Check the repository path or URL is correct
-- Ensure you have network access (for remote installations)
-
-### Installation Fails
-- Check that `.claude-plugin/plugin.json` exists in the repository
-- Verify the JSON files are valid (no syntax errors)
-- Try removing and re-adding the marketplace
-
-### Plugin Not Working
-- Verify the plugin is enabled: `/plugin list`
-- Try disabling and re-enabling: `/plugin disable bisq-dev-tools` then `/plugin enable bisq-dev-tools`
-- Check Claude Code logs for errors
-
-### Skills Not Activating
-- Skills activate automatically based on context
-- Try explicitly mentioning relevant keywords (e.g., "git commit message")
-- Ensure the plugin is properly installed and enabled
+- Plugin not found: verify the marketplace or local path points to this repository.
+- Skills not activating: reinstall the plugin and start a fresh agent thread.
+- Codex validation issues: check `.codex-plugin/plugin.json`, `skills/*/SKILL.md`, and `skills/*/agents/openai.yaml`.
+- Claude Code installation issues: check `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`.
 
 ## Getting Help
 
-- **Issues**: Report problems at [GitHub Issues](https://github.com/hiciefte/bisq-claude-plugin/issues)
-- **Documentation**: See [README.md](README.md) for plugin features
-- **Claude Code Help**: Run `/help` in Claude Code for general assistance
-
-## Next Steps
-
-After installation:
-1. Review the [README.md](README.md) to understand available features
-2. Check [skills/README.md](skills/README.md) for skill documentation
-3. Watch for updates as new commands and agents are added
-4. Consider contributing! See [CLAUDE.md](CLAUDE.md) for guidance
+Open an issue in this repository and include your tool, install method, validation output, and the prompt that did not behave as expected.

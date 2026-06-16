@@ -1,6 +1,6 @@
 {
   "name": "bisq-dev-tools",
-  "description": "Comprehensive development tools and configurations for Bisq contributors",
+  "description": "AI contributor workflows, skills, and review guidance for Bisq development",
   "version": "1.0.0",
   "author": {
     "name": "Bisq Community",
@@ -16,13 +16,17 @@
     "decentralized",
     "development",
     "java",
-    "javafx"
+    "javafx",
+    "dao",
+    "code-review"
   ],
   "category": "development",
   "tags": [
     "bitcoin",
     "p2p-networking",
     "java",
-    "gradle"
+    "gradle",
+    "financial-software",
+    "security"
   ]
 }

@@ -13,7 +13,7 @@ This guide covers using `bisq-dev-tools` with Claude Code or Codex.
 For the published marketplace:
 
 ```text
-/plugin marketplace add hiciefte/bisq-claude-plugin
+/plugin marketplace add hiciefte/bisq-ai-contributor-tools
 /plugin install bisq-dev-tools@bisq-marketplace
 /plugin list
 ```
@@ -21,7 +21,7 @@ For the published marketplace:
 For local development:
 
 ```text
-/plugin marketplace add /full/path/to/bisq-claude-plugin
+/plugin marketplace add /full/path/to/bisq-ai-contributor-tools
 /plugin install bisq-dev-tools@bisq-marketplace
 /plugin list
 ```

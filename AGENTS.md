@@ -16,7 +16,7 @@ git diff --check
 For local testing in Claude Code, add and install the marketplace:
 
 ```text
-/plugin marketplace add /path/to/bisq-claude-plugin
+/plugin marketplace add /path/to/bisq-ai-contributor-tools
 /plugin install bisq-dev-tools@bisq-marketplace
 /plugin list
 ```

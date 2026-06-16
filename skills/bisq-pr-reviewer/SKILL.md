@@ -226,7 +226,7 @@ Generate comprehensive report combining both phases:
 - Automatically reference when commit messages need improvement
 - Use git-commit-writer patterns for suggested rewrites
 
-**bisq-claude-plugin ecosystem**:
+**bisq-ai-contributor-tools ecosystem**:
 - Complements planned `bisq-architecture` skill
 - Could integrate with future `bitcoin-security` skill
 - Works alongside `/review-pr` command

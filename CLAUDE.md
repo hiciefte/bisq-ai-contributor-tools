@@ -22,7 +22,7 @@ This repository contains a **dual Codex and Claude Code plugin source** for Bisq
 ## Repository Map
 
 ```
-bisq-claude-plugin/
+bisq-ai-contributor-tools/
 ├── .claude-plugin/           # Claude Code plugin and marketplace metadata
 │   ├── plugin.json          # Plugin manifest with metadata
 │   └── marketplace.json     # Marketplace catalog definition
@@ -48,7 +48,7 @@ bisq-claude-plugin/
 ```
 
 **Claude Code commands:**
-- `/plugin marketplace add takahiro/bisq-claude-plugin` - Add marketplace
+- `/plugin marketplace add hiciefte/bisq-ai-contributor-tools` - Add marketplace
 - `/plugin install bisq-dev-tools@bisq-marketplace` - Install plugin
 - `/plugin list` - View installed plugins
 - `/plugin update bisq-dev-tools` - Update plugin to latest version

@@ -20,14 +20,14 @@ This repository packages skills, commands, and contributor guidance that help AI
 ### Claude Code
 
 ```text
-/plugin marketplace add hiciefte/bisq-claude-plugin
+/plugin marketplace add hiciefte/bisq-ai-contributor-tools
 /plugin install bisq-dev-tools@bisq-marketplace
 ```
 
 For local development, replace the marketplace argument with this repository path:
 
 ```text
-/plugin marketplace add /path/to/bisq-claude-plugin
+/plugin marketplace add /path/to/bisq-ai-contributor-tools
 /plugin install bisq-dev-tools@bisq-marketplace
 ```
 
@@ -44,7 +44,7 @@ Then reinstall the plugin through your configured Codex marketplace or plugin wo
 ## Project Structure
 
 ```text
-bisq-claude-plugin/
+bisq-ai-contributor-tools/
 ├── .codex-plugin/           # Codex plugin manifest
 ├── .claude-plugin/          # Claude Code plugin manifest and marketplace
 ├── skills/                  # Shared Codex/Claude Code skills

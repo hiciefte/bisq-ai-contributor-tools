@@ -20,7 +20,7 @@
         "email": "dev@bisq.network"
       },
       "homepage": "https://github.com/bisq-network/bisq",
-      "repository": "https://github.com/hiciefte/bisq-claude-plugin",
+      "repository": "https://github.com/hiciefte/bisq-ai-contributor-tools",
       "license": "AGPL-3.0",
       "keywords": [
         "bisq",

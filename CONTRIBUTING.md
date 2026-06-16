@@ -5,15 +5,15 @@ Thank you for improving the AI setup for Bisq contributors. This repository shou
 ## Local Setup
 
 ```bash
-git clone https://github.com/hiciefte/bisq-claude-plugin.git
-cd bisq-claude-plugin
+git clone https://github.com/hiciefte/bisq-ai-contributor-tools.git
+cd bisq-ai-contributor-tools
 python3 scripts/validate-repo.py
 ```
 
 For Claude Code, add and install the local marketplace:
 
 ```text
-/plugin marketplace add /full/path/to/bisq-claude-plugin
+/plugin marketplace add /full/path/to/bisq-ai-contributor-tools
 /plugin install bisq-dev-tools@bisq-marketplace
 ```
 

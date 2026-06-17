@@ -19,6 +19,18 @@ For Claude Code, add and install the local marketplace:
 
 For Codex, reinstall through your configured plugin source after local edits and start a new thread so skill metadata reloads.
 
+```bash
+codex plugin marketplace add hiciefte/bisq-ai-contributor-tools
+codex plugin add bisq-dev-tools@bisq-ai-contributor-tools
+```
+
+Codex installs from the generated bundle at `plugins/bisq-dev-tools`. After changing root-level skills, commands, or plugin docs, run:
+
+```bash
+python3 scripts/sync-codex-plugin-bundle.py
+python3 scripts/validate-repo.py
+```
+
 ## Branch Naming
 
 Use hyphen-case:
@@ -69,6 +81,7 @@ Claude Code slash-command workflows live in `commands/{command-name}.md`. Keep t
 Before opening a pull request:
 
 - Run `python3 scripts/validate-repo.py`.
+- Run `python3 scripts/sync-codex-plugin-bundle.py` when plugin source files changed.
 - Run `git diff --check`.
 - Test changed trigger phrases in Codex or Claude Code where possible.
 - Verify all referenced files and commands exist.

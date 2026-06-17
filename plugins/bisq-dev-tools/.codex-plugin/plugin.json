@@ -1,0 +1,45 @@
+{
+  "name": "bisq-dev-tools",
+  "version": "1.0.0",
+  "description": "AI contributor workflows, skills, and review guidance for Bisq development.",
+  "author": {
+    "name": "Bisq Community",
+    "email": "dev@bisq.network",
+    "url": "https://bisq.network"
+  },
+  "homepage": "https://github.com/hiciefte/bisq-ai-contributor-tools",
+  "repository": "https://github.com/hiciefte/bisq-ai-contributor-tools",
+  "license": "AGPL-3.0",
+  "keywords": [
+    "bisq",
+    "bitcoin",
+    "p2p",
+    "decentralized",
+    "java",
+    "javafx",
+    "gradle",
+    "dao",
+    "code-review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Bisq Dev Tools",
+    "shortDescription": "AI workflows for high-quality Bisq contributions",
+    "longDescription": "Codex and Claude Code skills for Bisq contributors working on Java, JavaFX, P2P networking, Bitcoin transaction safety, DAO governance, pull request review, and commit quality.",
+    "developerName": "Bisq Community",
+    "category": "Development",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Review",
+      "Git"
+    ],
+    "websiteURL": "https://bisq.network/",
+    "brandColor": "#2E8B57",
+    "defaultPrompt": [
+      "Use $bisq-contributor-workflow to implement a Bisq issue safely.",
+      "Use $bisq-pr-reviewer to review a Bisq pull request.",
+      "Use $bisq2-javafx-ui to implement a Bisq2 JavaFX UI change."
+    ]
+  }
+}

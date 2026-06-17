@@ -12,12 +12,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?$")
+BUNDLE = ROOT / "plugins" / "bisq-dev-tools"
+BUNDLE_DIRS = (".codex-plugin", "commands", "skills")
+BUNDLE_FILES = ("AGENTS.md", "CLAUDE.md", "INSTALLATION.md", "LICENSE", "README.md")
 
 
 def main() -> int:
     errors: list[str] = []
     validate_plugin_manifest(ROOT / ".codex-plugin" / "plugin.json", errors)
     validate_plugin_manifest(ROOT / ".claude-plugin" / "plugin.json", errors, require_interface=False)
+    validate_codex_marketplace(errors)
+    validate_bundle_sync(errors)
     validate_skills(errors)
     validate_json(ROOT / ".claude-plugin" / "marketplace.json", errors)
 
@@ -76,6 +81,71 @@ def validate_plugin_manifest(path: Path, errors: list[str], require_interface: b
         prompts = interface.get("defaultPrompt")
         if not isinstance(prompts, list) or not prompts:
             errors.append(f"{path.relative_to(ROOT)} interface.defaultPrompt must be a non-empty list")
+
+
+def validate_codex_marketplace(errors: list[str]) -> None:
+    path = ROOT / ".agents" / "plugins" / "marketplace.json"
+    payload = validate_json(path, errors)
+    if payload is None:
+        return
+    if payload.get("name") != "bisq-ai-contributor-tools":
+        errors.append(f"{path.relative_to(ROOT)} name must be bisq-ai-contributor-tools")
+    plugins = payload.get("plugins")
+    if not isinstance(plugins, list) or not plugins:
+        errors.append(f"{path.relative_to(ROOT)} plugins must be a non-empty list")
+        return
+    match = next((plugin for plugin in plugins if plugin.get("name") == "bisq-dev-tools"), None)
+    if not isinstance(match, dict):
+        errors.append(f"{path.relative_to(ROOT)} must include bisq-dev-tools plugin")
+        return
+    source = match.get("source")
+    if (
+        not isinstance(source, dict)
+        or source.get("source") != "local"
+        or source.get("path") != "./plugins/bisq-dev-tools"
+    ):
+        errors.append(
+            f"{path.relative_to(ROOT)} bisq-dev-tools source must point to ./plugins/bisq-dev-tools"
+        )
+    policy = match.get("policy")
+    if not isinstance(policy, dict):
+        errors.append(f"{path.relative_to(ROOT)} bisq-dev-tools policy must be an object")
+    elif policy.get("installation") != "AVAILABLE" or policy.get("authentication") != "ON_INSTALL":
+        errors.append(f"{path.relative_to(ROOT)} bisq-dev-tools policy values are invalid")
+    bundle_manifest = ROOT / "plugins" / "bisq-dev-tools" / ".codex-plugin" / "plugin.json"
+    if not bundle_manifest.is_file():
+        errors.append("plugins/bisq-dev-tools is missing .codex-plugin/plugin.json")
+
+
+def validate_bundle_sync(errors: list[str]) -> None:
+    if not BUNDLE.is_dir():
+        errors.append("plugins/bisq-dev-tools bundle is missing")
+        return
+    for directory in BUNDLE_DIRS:
+        compare_tree(ROOT / directory, BUNDLE / directory, errors)
+    for file_name in BUNDLE_FILES:
+        compare_file(ROOT / file_name, BUNDLE / file_name, errors)
+
+
+def compare_tree(source: Path, target: Path, errors: list[str]) -> None:
+    if not target.is_dir():
+        errors.append(f"{target.relative_to(ROOT)} is missing; run scripts/sync-codex-plugin-bundle.py")
+        return
+    source_files = sorted(path.relative_to(source) for path in source.rglob("*") if path.is_file())
+    target_files = sorted(path.relative_to(target) for path in target.rglob("*") if path.is_file())
+    if source_files != target_files:
+        errors.append(f"{target.relative_to(ROOT)} file list is out of sync")
+        return
+    for relative_path in source_files:
+        compare_file(source / relative_path, target / relative_path, errors)
+
+
+def compare_file(source: Path, target: Path, errors: list[str]) -> None:
+    if not target.is_file():
+        errors.append(f"{target.relative_to(ROOT)} is missing; run scripts/sync-codex-plugin-bundle.py")
+        return
+    if source.read_bytes() != target.read_bytes():
+        errors.append(f"{target.relative_to(ROOT)} is out of sync; run scripts/sync-codex-plugin-bundle.py")
 
 
 def validate_skills(errors: list[str]) -> None:

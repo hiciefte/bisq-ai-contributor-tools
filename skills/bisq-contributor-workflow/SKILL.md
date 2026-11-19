@@ -21,6 +21,7 @@ Help Bisq contributors make small, well-verified changes that respect Bisq's dec
 
 - For Bitcoin, wallet, key, fee, address, or transaction code, verify private-key handling, amount precision, dust/fee boundaries, and network selection.
 - For P2P or trade protocol changes, check message validation, state transitions, replay/idempotency behavior, and peer trust assumptions.
+- For `.proto` changes, keep compatibility with the last released version (the newest release tag). Unreleased development commits are not a constraint, also when development builds wrote data with them. Follow **Baseline for Backward Compatibility** in the project instructions and `docs/dev/backward-compatibility.md`.
 - For JavaFX UI changes, preserve the existing MVC structure, view/controller boundaries, resource usage, and responsive layout behavior.
 - For DAO governance changes, verify proposal/vote lifecycle assumptions and backwards compatibility with existing DAO state.
 - For docs and prompts, prefer contributor workflow clarity over marketing copy.
@@ -39,4 +40,4 @@ If a module or task name differs, inspect `settings.gradle`, `build.gradle`, or 
 
 ## Related Resources
 
-For review-heavy work, use `bisq-pr-reviewer`. For UI-specific polish, use `ui-design-principles`. For commit messages, use `git-commit-writer`.
+Use `bisq-pr-reviewer` for review-heavy work, `ui-design-principles` for UI-specific polish, and `git-commit-writer` for commit message guidance.

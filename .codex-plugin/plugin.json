@@ -1,6 +1,6 @@
 {
   "name": "bisq-dev-tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AI contributor workflows, skills, and review guidance for Bisq development.",
   "author": {
     "name": "Bisq Community",

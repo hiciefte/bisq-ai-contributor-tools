@@ -14,7 +14,7 @@
       "name": "bisq-dev-tools",
       "source": ".",
       "description": "AI contributor workflows, skills, commands, and review guidance for Bisq contributors working on P2P networking, Bitcoin transactions, DAO governance, and JavaFX development",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "Bisq Community",
         "email": "dev@bisq.network"

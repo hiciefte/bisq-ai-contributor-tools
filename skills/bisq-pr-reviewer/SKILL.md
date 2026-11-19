@@ -118,20 +118,20 @@ Validate:
 - Service layer separation
 - Trade protocol state machine safety (if applicable)
 - DAO governance logic correctness (if applicable)
-- P2P protocol versioning and compatibility
+- P2P protocol versioning and compatibility with the last released version (the newest release tag); a `.proto` change must keep the field numbers, types, and meanings which that release uses, and it may change what only unreleased commits added
 
 #### 4. Domain-Specific Checks
 
 **Trade Protocol Safety** (if trade-related changes):
 ```bash
-Grep "TradeProtocol|TradingPeer|TradeManager" --output_mode files_with_matches
+grep -R -l -E "TradeProtocol|TradingPeer|TradeManager" .
 ```
 
 Validate state transitions, peer communication safety, and financial correctness.
 
 **DAO Governance Impact** (if DAO changes):
 ```bash
-Grep "DAO|Governance|Proposal|Vote|Bonding" --output_mode files_with_matches
+grep -R -l -E "DAO|Governance|Proposal|Vote|Bonding" .
 ```
 
 Validate voting logic, proposal validation, and bond management.
@@ -218,7 +218,7 @@ Generate comprehensive report combining both phases:
 **DAO/Protocol Changes**:
 - Apply extra scrutiny to governance and P2P code
 - Simulate scenarios for validation
-- Assess backward compatibility thoroughly
+- Assess backward compatibility thoroughly against the last released version; do not request compatibility with unreleased development changes
 
 ## Integration Points
 
